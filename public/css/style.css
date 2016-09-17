@@ -1,0 +1,60 @@
+/********* Posts **************/
+.post-block {
+    background-color: #eee;
+    padding: 15px;
+}
+.post-content-details {
+    font-size: 10px;
+}
+.post-content-body {
+    font-size: 18px;
+    font-weight: 600;
+}
+.post-form textarea {
+    width: 90% !important;
+}
+.post-form input[type="text"] {
+    width: 90%;
+}
+.post-actions {
+    float: right;
+}
+/********* Comments *****************/
+.comments-block {
+    background-color: #f5f8fa;
+    padding: 15px;
+    margin: 10px;
+}
+
+.comment-content-details {
+    font-size: 10px;
+}
+.comment-content-body {
+    font-size: 15px;
+    font-weight: 500;
+}
+.comments-block textarea {
+    width: 90% !important;
+    margin: 20px 20px 0 0;
+}
+.comments-block input[type="text"] {
+    width: 90%;
+}
+
+/************************************/
+.reply-form{
+    display:none;
+}
+.show-reply-form, .hide-reply-form {
+    cursor: pointer;
+}
+.replies-block {
+    background-color: #d9edf7;
+    margin: 10px;
+}
+.reply-block {
+    padding: 15px;
+}
+a {
+    cursor: pointer;
+}

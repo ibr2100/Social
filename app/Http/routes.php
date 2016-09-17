@@ -16,5 +16,14 @@ Route::get('/', function () {
 });
 
 Route::auth();
+Route::get('/', 'HomeController@show');
+Route::get('/home', 'HomeController@show');
+Route::post('home', 'HomeController@AddPost');
+Route::post('home/{id}', 'HomeController@AddComment');
+Route::post('posts/{id}', 'Postcontroller@show');
+Route::get('posts/{id}', 'PostController@show');
+Route::post('posts/{id}', 'PostController@AddComment');
+Route::get('profile/{id}', 'ProfileController@show');
+Route::post('profile/{id}', 'ProfileController@show');
+Route::post('profile/{user_id}/{id}', 'HomeController@AddComment');
 
-Route::get('/home', 'HomeController@index');
