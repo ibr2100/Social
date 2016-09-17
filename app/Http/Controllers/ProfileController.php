@@ -36,7 +36,7 @@ class ProfileController extends Controller
         $comment = new Comment();
         $post=Post::find($id);
         if ($request->isMethod('post')){
-            $comment->contain=$request->contain;
+            $comment->content=$request->commentcontent;
             $comment->user_id=Auth::User()->id;
             $comment->post_id=$id;
             $comment->save();

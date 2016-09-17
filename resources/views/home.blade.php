@@ -1,11 +1,23 @@
 @extends('layouts.app')
 @section('content')
+
+
     <div class="container">
         <form action="home" method="POST" enctype="multipart/form-data">
             {{csrf_field()}}
             <div class="form-group">
 
-                <textarea rows="4" cols="50" name="contain" class="form-control">
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <textarea rows="4" cols="50" name="postcontent" class="form-control">
       </textarea>
                 <input type="file" name="photo">
             </div>
@@ -20,11 +32,12 @@
                 <table class="table">
                     <tbody>
                     <tr class="success">
-                        <td> by:<a href="/profile/{{$posts[$i]->user->id}}">{{$posts[$i]->user->name}}</a></td>
+                        <td> by:<a href="/profile/{{$posts[$i]->user->id}}">{{$posts[$i]->user->name}}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <?php echo \Carbon\Carbon::createFromTimeStamp(strtotime(($posts[$i])->created_at ))->diffForHumans() ?>
+                        </td>
 
-                        <td class="col-lg-12">  {{($posts[$i])->created_at }}</td>
+                        <td class="col-lg-12">
                     </tr>
-                    <div class="interaction"><a href="#" class="edit">Edit</a></div>
 
 
                     <div class="form-group">
@@ -32,12 +45,13 @@
                         </br>
                         <a href="#">
                             <tr class="danger">
-                                <td class="col-lg-12"><h2> {{ $posts[$i]->contain}}</h2>
+                                <td class="col-lg-12"><h2> {{ $posts[$i]->content}}</h2>
                                     <a href="posts/{{$posts[$i]->id}}"><h5>POST-PAGE</h5></a>
 
                                     @if($posts[$i]->image_url!=null)
-                                        "<img src="{{ url('img')}}/{{$posts[$i]->image_url}}" alt="" height="500"
-                                              width="1000">
+                                        <img class="img-circle" src="{{ url('img')}}/{{$posts[$i]->image_url}}" alt="Chania" width="800" height="600">
+
+
                                     @endif
                                 </td>
                                 <td>&nbsp;</td>
@@ -48,12 +62,13 @@
                                 </br>
                                 <td>
 
-                                    <input rows="4" cols="50" type="text" name="contain"
+
+                                    <input rows="4" cols="50" type="text" name="commentcontent"
                                            placeholder="ADD COMMMENT HERE  . . . " class="form-control"/>
                                 </td>
                                 <td>
-                                    <input class="sub" id="sub" type="submit" value="add comment"
-                                           class="btn btn-primary"/>
+                                    <input rows="4" cols="50" type="submit" value="comment" class="btn btn-primary"/>
+
 
                             </div>
                             </td>
@@ -76,10 +91,11 @@
 
                             <tr class="info">
                                 <td>{{ $comment->user->name}}
-                                    <h5>{{$comment->contain}}</h5>
-                                    <a href="#">reply</a>
+                                    <h5>{{$comment->content}}</h5>
+                                    <a href="#">reply</a>            &nbsp;&nbsp;&nbsp;&nbsp;                        <?php echo \Carbon\Carbon::createFromTimeStamp(strtotime($comment->created_at ))->diffForHumans() ?>
+
                                 </td>
-                                <td> {{$comment->created_at}}
+                                <td>
                                 </td>
                             </tr>
 

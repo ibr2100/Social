@@ -47,13 +47,12 @@ class HomeController extends Controller
         $post = new Post();
         if ($request->isMethod('post')) {
             $this->validate($request, [
-                'contain' => 'required'
+                'postcontent' => 'required'
             ]);
-            $post->contain = $request->contain;
+            $post->content = $request->postcontent;
             $post->user_id = Auth::User()->id;
             if ($request->file('photo') != null) {
                 $photo = $request->file('photo');
-                dd($photo->getFileInfo());
                 $destinationPath = base_path() . '/public/img';
                 $filename = time() . '.' . $photo->getClientOriginalExtension();
                 $photo->move($destinationPath, $filename);
@@ -75,7 +74,10 @@ class HomeController extends Controller
     {
         $comment = new Comment();
         if ($request->isMethod('post')) {
-            $comment->contain = $request->contain;
+            $this->validate($request, [
+                'commentcontent' => 'required'
+            ]);
+            $comment->content = $request->commentcontent;
             $comment->user_id = Auth::User()->id;
             $comment->post_id = $id;
             $comment->save();
@@ -84,5 +86,6 @@ class HomeController extends Controller
         return view('home');
 
     }
+
 
 }

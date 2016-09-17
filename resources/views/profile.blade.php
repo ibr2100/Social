@@ -4,14 +4,17 @@ use App\User;
 @extends('layouts.app')
 @section('content')
     <div class="container">
-<h3>profile: {{$posts[0]->user->name}} </h3>
+        <div class="jumbotron">
+            <h3>{{$posts[0]->user->name}} </h3>
+</div>
         @for($i=0;$i<count($posts); $i++)
                 {{csrf_field()}}
                 <table class="table">
                     <tbody>
                     <tr class="success">
-                        <td > by:{{ $posts[$i]->user->name}} </td>
-                        <td>&nbsp;</td>
+                        <td > by:{{ $posts[$i]->user->name}} &nbsp;&nbsp;&nbsp;&nbsp;  <?php echo \Carbon\Carbon::createFromTimeStamp(strtotime($posts[$i]->created_at ))->diffForHumans() ?></td>
+                        <td>&nbsp;
+                        </td>
 
                     </tr>
 
@@ -21,8 +24,8 @@ use App\User;
                         </br>
                         <a href="#">
                             <tr class="danger">
-                                <td><h2> {{ $posts[$i]->contain}}</h2>
-                                    <a href="posts/{{$posts[$i]->id}}">Link</a>
+                                <td><h2> {{ $posts[$i]->content}}</h2>
+                                    <a href="/posts/{{$posts[$i]->id}}">Link</a>
 
                                     @if($posts[$i]->image_url!=null)
                                         "<img src="{{ url('img')}}/{{$posts[$i]->image_url}}" alt="" height="500" width="1000">
@@ -40,7 +43,7 @@ use App\User;
 
 
                                 <div class="form-group">
-                                    <input rows="12" cols="16"style="width:100%;" type="text" name="contain"
+                                    <input rows="12" cols="16"style="width:100%;" type="text" name="commentcontent"
                                            placeholder="ADD COMMMENT HERE  .  .  . " class="form-control"/>
                             </td>
                             <td class="col-md-1"> <input type="submit" value="add comment" class="btn btn-primary"/>
@@ -61,10 +64,13 @@ use App\User;
 
         <tr  class="info">
             <td>{{ $comment->user->name}}
-                <h5>{{$comment->contain}}</h5>
-                <a href="#">reply</a>
+                <h5>{{$comment->content}}</h5>
+                <a href="#">reply</a> &nbsp;&nbsp;&nbsp;&nbsp;
+            <?php echo \Carbon\Carbon::createFromTimeStamp(strtotime($comment->created_at ))->diffForHumans() ?>
+
+
             </td>
-            <td> {{$comment->created_at}}
+            <td>
             </td>
         </tr>
 

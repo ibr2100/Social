@@ -14,7 +14,7 @@ class CreateRepliesTable extends Migration
     {
         Schema::create('replies', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('contain');
+            $table->text('content');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references("id")->on('users');
             $table->integer('comment_id')->unsigned();
