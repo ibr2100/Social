@@ -87,5 +87,18 @@ class HomeController extends Controller
 
     }
 
+    public function AddReply(Request $request,$id){
+        $reply = new Reply();
+        if ($request->isMethod('post')) {
+            $reply->user_id = Auth::user()->id;
+            $reply->content= $request->replycontent;
+            $reply->comment_id = $id;
+            $reply->save();
+            return back();
+
+        }
+        return view('home');
+
+    }
 
 }
