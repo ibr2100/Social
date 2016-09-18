@@ -26,4 +26,5 @@ Route::post('posts/{id}', 'PostController@AddComment');
 Route::get('profile/{id}', 'ProfileController@show');
 Route::post('profile/{id}', 'ProfileController@show');
 Route::post('profile/{user_id}/{id}', 'HomeController@AddComment');
+Route::get('profile', 'ProfileController@showthisprofile');
 
