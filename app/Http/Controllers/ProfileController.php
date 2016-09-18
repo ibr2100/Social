@@ -20,14 +20,17 @@ class ProfileController extends Controller
         $this->middleware('auth');
     }
 
-    public function show($id)
+     public function show($id)
     {
-      $posts=[];
-        $psts = Post::OrderBy('id', 'DESC')->get();
-        foreach($psts as $post) {
-            if($post->user->id==$id)
-            $posts[] = ($post);
-        }
+
+        $posts = Post::where('user_id', $id)->orderBy('id', 'desc')->get();
+        return view('profile',compact('posts'));
+
+    }
+    public function showthisprofile()
+    {
+        $posts = Post::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->get();
+
         return view('profile',compact('posts'));
 
     }
